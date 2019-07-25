@@ -45,4 +45,4 @@ ex. workon ai2
 pip install -r requirements.txt
 
 5. try to run:
-python recognizer.py
+python populator.py
