@@ -58,15 +58,9 @@ def say(engine, text):
     engine.runAndWait()
 
 
-if __name__ == "__main__":
-    #parameters needed to collect
-    PARAMS = ["first name", "last name", "street number", "street name", "city"]
-    PARAMS = ["first name", "last name"]
-    values = {}
-    PROMPT_LIMIT = 5
-
-
+def populate(PARAMS=[], PROMPT_LIMIT=5):
     # create recognizer and mic instances
+    values = {}
     engine = pyt.init()
     recognizer = sr.Recognizer()
     microphone = sr.Microphone()
@@ -97,7 +91,17 @@ if __name__ == "__main__":
                 values[p] = value['transcription']
                 break
             else:
-                say(engine, "Let's try again for {p}.")
+                say(engine, f"Let's try again for {p}.")
 
     print(values)
     say(engine, f"You are {values['first name']} {values['last name']}")
+
+    return values
+
+if __name__ == "__main__":
+    #parameters needed to collect
+    PARAMS = ["first name", "last name", "street number", "street name", "city"]
+    PARAMS = ["first name", "last name"]
+    populate(PARAMS, PROMPT_LIMIT=5)
+
+
